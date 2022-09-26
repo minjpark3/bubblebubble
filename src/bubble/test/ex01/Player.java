@@ -43,7 +43,7 @@ public class Player extends JLabel implements Moveable {
 		setSize(50, 50);
 		setLocation(x, y);
 	}
-
+	//이벤트 핸들러 부분 
 	@Override
 	public void left() {
 		setIcon(playerL);
@@ -53,6 +53,11 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void right() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		setIcon(playerR);
 		x = x + 10;
 		setLocation(x,y);
@@ -60,7 +65,7 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void up() {
-
+		System.out.println("점프");
 	}
 
 	@Override
