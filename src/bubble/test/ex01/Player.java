@@ -51,7 +51,6 @@ public class Player extends JLabel implements Moveable {
 		right = false;
 		up = false;
 		down = false;
-		
 		leftWallCrash = false;
 		rightWallCrash = false;
 
@@ -130,7 +129,7 @@ public class Player extends JLabel implements Moveable {
 		System.out.println("down");
 		down = true;
 		new Thread(() -> {
-			for (int i = 0; i < 130 / JUMPSPEED; i++) {
+			while(down) {
 				y = y + JUMPSPEED;
 				setLocation(x, y);
 				try {

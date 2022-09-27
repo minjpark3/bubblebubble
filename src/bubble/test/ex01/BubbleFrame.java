@@ -8,9 +8,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import lombok.Getter;
+import lombok.Setter;
+
 //1.윈도우 창이 되었음
 //2.윈도우 창은 내부에 패널을 하나 가지고 있다.
 
+@Getter
+@Setter
 public class BubbleFrame extends JFrame{
 	
 	private JLabel backgroundMap;
@@ -24,15 +29,15 @@ public class BubbleFrame extends JFrame{
 	
 	}
 	private void initObject() {
-		backgroundMap = new JLabel(new ImageIcon("image/backgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("image/backgroundMapService.png"));
 		setContentPane(backgroundMap);//3개층을 만들필요가 없어짐
 		player = new Player();
-		add(player);
+		getContentPane().add(player);
 	}
 
 	private void initSetting() {
 		setSize(1000,640);
-		setLayout(null); //absoulte 레이아웃(자유롭게 그림을 그릴 수 있다)
+		getContentPane().setLayout(null); //absoulte 레이아웃(자유롭게 그림을 그릴 수 있다)
 	
 		setLocationRelativeTo(null);//JFrame 가운데 배치하기 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x버튼 으로 창끌때 JVM같이 종료
