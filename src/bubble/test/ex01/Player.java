@@ -30,6 +30,7 @@ public class Player extends JLabel implements Moveable {
 	public Player() {
 		initObject();
 		initSetting();
+		initBackgroundPlayerService();
 	}
 
 	private void initObject() {
@@ -39,7 +40,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	private void initSetting() {
-		x = 55;
+		x = 80;
 		y = 535;
 
 		left = false;
@@ -50,6 +51,10 @@ public class Player extends JLabel implements Moveable {
 		setIcon(playerR);
 		setSize(50, 50);
 		setLocation(x, y);
+	}
+	private void initBackgroundPlayerService() {
+		new Thread(new BackgroundPlayerService(this)).start();
+		
 	}
 
 	// 이벤트 핸들러 부분
@@ -97,7 +102,7 @@ public class Player extends JLabel implements Moveable {
 				y = y-JUMPSPEED;
 				setLocation(x,y);
 				try {
-					Thread.sleep(10);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -119,7 +124,7 @@ public class Player extends JLabel implements Moveable {
 				y = y+ JUMPSPEED;
 				setLocation(x,y);
 				try {
-					Thread.sleep(10);
+					Thread.sleep(3);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
