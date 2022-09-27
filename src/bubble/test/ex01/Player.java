@@ -21,10 +21,14 @@ public class Player extends JLabel implements Moveable {
 	private boolean up;
 	private boolean down;
 	
-	//플레이어 속도 상태
+	//벽에 충돌 상태 
+	private boolean leftWallCrash;
+	private boolean rightWallCrash;
+
+	// 플레이어 속도 상태
 	private final int SPEED = 4;
-	private final int JUMPSPEED =2;
-	
+	private final int JUMPSPEED = 2;
+
 	private ImageIcon playerR, playerL;
 
 	public Player() {
@@ -47,14 +51,18 @@ public class Player extends JLabel implements Moveable {
 		right = false;
 		up = false;
 		down = false;
+		
+		leftWallCrash = false;
+		rightWallCrash = false;
 
 		setIcon(playerR);
 		setSize(50, 50);
 		setLocation(x, y);
 	}
+
 	private void initBackgroundPlayerService() {
 		new Thread(new BackgroundPlayerService(this)).start();
-		
+
 	}
 
 	// 이벤트 핸들러 부분
@@ -63,14 +71,15 @@ public class Player extends JLabel implements Moveable {
 		System.out.println("Left");
 		left = true;
 		new Thread(() -> {
-			while(left) {
+			while (left) {
 				setIcon(playerL);
 				x = x - SPEED;
 				setLocation(x, y);
 				try {
-					Thread.sleep(10);//0.01초
-				} catch (Exception e) {
-					}
+					Thread.sleep(10);// 0.01초
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}
@@ -80,38 +89,39 @@ public class Player extends JLabel implements Moveable {
 		right = true;
 		System.out.println("Right");
 		new Thread(() -> {
-			while(right) {
-			setIcon(playerR);
-			x = x + SPEED;
-			setLocation(x, y);
-			try {
-				Thread.sleep(10);//0.01초
-			} catch (Exception e) {
+			while (right) {
+				setIcon(playerR);
+				x = x + SPEED;
+				setLocation(x, y);
+				try {
+					Thread.sleep(10);// 0.01초
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		}).start();
-	
+
 	}
-	//left+up,right+up둘다 가능
+
+	// left+up,right+up둘다 가능
 	@Override
 	public void up() {
 		System.out.println("up");
 		up = true;
-		new Thread(()->{
-			for(int i = 0; i<130/JUMPSPEED; i++) {
-				y = y-JUMPSPEED;
-				setLocation(x,y);
+		new Thread(() -> {
+			for (int i = 0; i < 130 / JUMPSPEED; i++) {
+				y = y - JUMPSPEED;
+				setLocation(x, y);
 				try {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 			up = false;
 			down();
-			
-			
+
 		}).start();
 	}
 
@@ -119,10 +129,10 @@ public class Player extends JLabel implements Moveable {
 	public void down() {
 		System.out.println("down");
 		down = true;
-		new Thread(()->{
-			for(int i = 0; i<130/JUMPSPEED; i++) {
-				y = y+ JUMPSPEED;
-				setLocation(x,y);
+		new Thread(() -> {
+			for (int i = 0; i < 130 / JUMPSPEED; i++) {
+				y = y + JUMPSPEED;
+				setLocation(x, y);
 				try {
 					Thread.sleep(3);
 				} catch (InterruptedException e) {
