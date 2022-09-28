@@ -1,8 +1,11 @@
-package bubble.test.ex01;
+package game.component;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import game.BubbleFrame;
+import game.Moveable;
+import game.service.BackgroundBubbleService;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package bubble.test.ex01;
+package game;
 
 /**
  * 다중 상속이 안된느 것이 많기 때문에

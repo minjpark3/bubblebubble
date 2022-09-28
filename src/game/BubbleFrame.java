@@ -1,4 +1,4 @@
-package bubble.test.ex01;
+package game;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -8,6 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import game.component.Enemy;
+import game.component.Player;
+import game.music.BGM;
 import lombok.Getter;
 import lombok.Setter;
 

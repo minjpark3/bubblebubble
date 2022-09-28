@@ -1,4 +1,4 @@
-package bubble.test.ex01;
+package game.service;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -6,6 +6,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import game.component.Bubble;
 import lombok.Getter;
 import lombok.Setter;
 

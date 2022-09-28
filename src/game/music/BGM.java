@@ -1,4 +1,4 @@
-package bubble.test.ex01;
+package game.music;
 
 import java.io.File;
 import java.io.IOException;

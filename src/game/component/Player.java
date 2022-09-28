@@ -1,4 +1,4 @@
-package bubble.test.ex01;
+package game.component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,10 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import game.BubbleFrame;
+import game.Moveable;
+import game.service.BackgroundPlayerService;
+import game.state.PlayerWay;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,8 +1,12 @@
-package bubble.test.ex01;
+package game.component;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import game.BubbleFrame;
+import game.Moveable;
+import game.service.BackgroundEnemyService;
+import game.state.EnemyWay;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +40,8 @@ public class Enemy extends JLabel implements Moveable {
 		this.mContext = mContext;
 		initObject();
 		initSetting();
-		//initBackgroundEnemyService();
+		initBackgroundEnemyService();
+		right();
 	}
 
 	private void initObject() {
@@ -64,7 +69,7 @@ public class Enemy extends JLabel implements Moveable {
 	}
 
 	private void initBackgroundEnemyService() {
-		//new Thread(new BackgroundEnemyService(this)).start();
+		new Thread(new BackgroundEnemyService(this)).start();
 
 	}
 	
