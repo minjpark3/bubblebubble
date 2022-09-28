@@ -30,11 +30,11 @@ public class BackgroundPlayerService implements Runnable {
 		while (true) {
 			
 			// 색상확인
-			Color leftColor = new Color(image.getRGB(player.getX() -10, player.getY() +25));
+			Color leftColor = new Color(image.getRGB(player.getX()-5, player.getY() +25));
 			Color rightColor = new Color(image.getRGB(player.getX() +50+15, player.getY() +25));
 			//-2가 나온다는 뜻은 바닥에 색깔이 없이 흰색 
-			int bottomColor = image.getRGB(player.getX() +10 , player.getY() +50 +5) //-1
-					+image.getRGB(player.getX()+50 -10, player.getY() +50 +5); 
+			int bottomColor = image.getRGB(player.getX() +20 , player.getY() +50 +5) //-1
+					+image.getRGB(player.getX()+50 +10, player.getY() +50 +5); 
 			
 			
 			//바닥충돌 확인
