@@ -12,6 +12,7 @@ public class Bubble extends JLabel implements Moveable {
 	// 의존성 콤포지션이 필요함(버블이 플레이어에게서 발사되니깐)
 	private BubbleFrame mContext;
 	private Player player;
+	private Enemy enemy;
 	private BackgroundBubbleService backgroundBubbleService;
 
 	// 위치상태
@@ -32,6 +33,7 @@ public class Bubble extends JLabel implements Moveable {
 	public Bubble(BubbleFrame mContext ) {
 		this.mContext = mContext;
 		this.player = mContext.getPlayer();
+		this.enemy = mContext.getEnemy();
 		initObject();
 		initSetting();
 		//initThread();
@@ -83,6 +85,13 @@ public class Bubble extends JLabel implements Moveable {
 				left = false;
 				break;
 			}
+			if((Math.abs(x-enemy.getX())>45 && Math.abs(x-enemy.getX())<55) &&
+					Math.abs(y-enemy.getY())>0 && Math.abs(y-enemy.getY()) <50) {
+				System.out.println("물방울과 적군 충돌 ");
+				attack();
+				
+			}
+			
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -133,6 +142,12 @@ public class Bubble extends JLabel implements Moveable {
 		}
 		clearBubble();
 	}
+	@Override
+	public void attack() {
+		state =1;
+		setIcon(bubbled);
+	}
+	
 	private void clearBubble() {
 		try {
 			Thread.sleep(1000);

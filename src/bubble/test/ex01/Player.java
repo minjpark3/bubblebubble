@@ -86,7 +86,6 @@ public class Player extends JLabel implements Moveable {
 	// 이벤트 핸들러 부분
 	@Override
 	public void left() {
-		System.out.println("Left");
 		playerWay = PlayerWay.LEFT;
 		left = true;
 		new Thread(() -> {
@@ -107,7 +106,6 @@ public class Player extends JLabel implements Moveable {
 	public void right() {
 		right = true;
 		playerWay = PlayerWay.RIGHT;
-		System.out.println("Right");
 		new Thread(() -> {
 			while (right) {
 				setIcon(playerR);
@@ -126,7 +124,6 @@ public class Player extends JLabel implements Moveable {
 	// left+up,right+up둘다 가능
 	@Override
 	public void up() {
-		System.out.println("up");
 		up = true;
 		new Thread(() -> {
 			for (int i = 0; i < 130 / JUMPSPEED; i++) {
@@ -147,7 +144,6 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void down() {
-		System.out.println("down");
 		down = true;
 		new Thread(() -> {
 			while(down) {
