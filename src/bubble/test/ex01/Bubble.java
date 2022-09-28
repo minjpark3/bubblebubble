@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class Bubble extends JLabel implements Moveable {
 	// 의존성 콤포지션이 필요함(버블이 플레이어에게서 발사되니깐)
+	private BubbleFrame mContext;
 	private Player player;
 	private BackgroundBubbleService backgroundBubbleService;
 
@@ -28,8 +29,9 @@ public class Bubble extends JLabel implements Moveable {
 	private ImageIcon bubbled; // 적을 가둔 물방울
 	private ImageIcon bomb; // 물방울이 터진 상태
 
-	public Bubble(Player player) {
-		this.player = player;
+	public Bubble(BubbleFrame mContext ) {
+		this.mContext = mContext;
+		this.player = mContext.getPlayer();
 		initObject();
 		initSetting();
 		initThread();
@@ -40,7 +42,7 @@ public class Bubble extends JLabel implements Moveable {
 		bubble = new ImageIcon("image/bubble.png");
 		bubbled = new ImageIcon("image/bubbled.png");
 		bomb = new ImageIcon("image/bomb.png");
-		
+
 		backgroundBubbleService = new BackgroundBubbleService(this);
 
 	}
@@ -78,6 +80,7 @@ public class Bubble extends JLabel implements Moveable {
 			x--;
 			setLocation(x, y);
 			if (backgroundBubbleService.leftWall()) {
+				left = false;
 				break;
 			}
 			try {
@@ -97,6 +100,7 @@ public class Bubble extends JLabel implements Moveable {
 			x++;
 			setLocation(x, y);
 			if (backgroundBubbleService.rightWall()) {
+				right = false;
 				break;
 			}
 			try {
@@ -113,19 +117,32 @@ public class Bubble extends JLabel implements Moveable {
 	@Override
 	public void up() {
 		up = true;
-		while(up){
-				y--;
-				setLocation(x, y);
-				
-				if (backgroundBubbleService.topWall()) {
-					break;
-				}
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			
+		while (up) {
+			y--;
+			setLocation(x, y);
+
+			if (backgroundBubbleService.topWall()) {
+				up = false;
+				break;
+			}
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
+		clearBubble();
+	}
+	private void clearBubble() {
+		try {
+			Thread.sleep(1000);
+			setIcon(bomb);
+			Thread.sleep(500); 
+			mContext.remove(this); //BubbleFrame의 bubble이 heap에서 소멸
+			mContext.repaint(); //BubbleFrame을 다시 그린다(메모리에 없는건 안그림)
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
