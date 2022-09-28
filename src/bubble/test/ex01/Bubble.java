@@ -85,11 +85,13 @@ public class Bubble extends JLabel implements Moveable {
 				left = false;
 				break;
 			}
-			if((Math.abs(x-enemy.getX())>45 && Math.abs(x-enemy.getX())<55) &&
+			if((Math.abs(x-enemy.getX())<10) &&
 					Math.abs(y-enemy.getY())>0 && Math.abs(y-enemy.getY()) <50) {
 				System.out.println("물방울과 적군 충돌 ");
-				attack();
-				
+				if(enemy.getState()==0) {
+					attack();
+					break;
+				}
 			}
 			
 			try {
@@ -111,6 +113,14 @@ public class Bubble extends JLabel implements Moveable {
 			if (backgroundBubbleService.rightWall()) {
 				right = false;
 				break;
+			}
+			if((Math.abs(x-enemy.getX())<10) &&
+					Math.abs(y-enemy.getY())>0 && Math.abs(y-enemy.getY()) <50) {
+				System.out.println("물방울과 적군 충돌 ");
+				if(enemy.getState()==0) {
+					attack();
+					break;
+				}
 			}
 			try {
 				Thread.sleep(1);
@@ -134,18 +144,27 @@ public class Bubble extends JLabel implements Moveable {
 				up = false;
 				break;
 			}
+			
 			try {
-				Thread.sleep(1);
+				if(state== 0){//기본물방울
+					Thread.sleep(1);
+				}else {//적을 가둔 물방울
+					Thread.sleep(10);
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		clearBubble();
+		if(state==0) clearBubble();
+		
 	}
 	@Override
 	public void attack() {
 		state =1;
+		enemy.setState(1);
 		setIcon(bubbled);
+		mContext.remove(enemy);//메모리에서 사라지게 한다.(가비지컬렉션에 있고 즉시 삭제되는것은 아님)
+		mContext.repaint();//화면갱신
 	}
 	
 	private void clearBubble() {
