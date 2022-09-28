@@ -34,7 +34,7 @@ public class Bubble extends JLabel implements Moveable {
 		this.player = mContext.getPlayer();
 		initObject();
 		initSetting();
-		initThread();
+		//initThread();
 
 	}
 
@@ -61,18 +61,18 @@ public class Bubble extends JLabel implements Moveable {
 		state = 0;
 
 	}
-
-	private void initThread() {
-		new Thread(() -> {
-			if (player.getPlayerWay() == PlayerWay.LEFT) {
-				left();
-			} else {
-				right();
-			}
-
-		}).start();
-	}
-
+/**
+*	private void initThread() {
+*		new Thread(() -> {
+*			if (player.getPlayerWay() == PlayerWay.LEFT) {
+*				left();
+*			} else {
+*				right();
+*			}
+*
+*		}).start();
+* }
+*/	
 	@Override
 	public void left() {
 		left = true;

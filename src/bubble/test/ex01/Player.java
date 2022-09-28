@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Player extends JLabel implements Moveable {
-
+	private BubbleFrame mContext;
 	// 위치상태
 	private int x;
 	private int y;
@@ -34,7 +34,8 @@ public class Player extends JLabel implements Moveable {
 
 	private ImageIcon playerR, playerL;
 
-	public Player() {
+	public Player(BubbleFrame mContext) {
+		this.mContext = mContext;
 		initObject();
 		initSetting();
 		initBackgroundPlayerService();
@@ -67,6 +68,19 @@ public class Player extends JLabel implements Moveable {
 	private void initBackgroundPlayerService() {
 		new Thread(new BackgroundPlayerService(this)).start();
 
+	}
+	@Override
+	public void attack() {
+		new Thread(()->{
+			Bubble bubble = new Bubble(mContext);
+			mContext.add(bubble);
+			if(playerWay ==PlayerWay.LEFT) {
+				bubble.left();
+			}else {
+				bubble.right();
+			}
+		}).start();
+		
 	}
 
 	// 이벤트 핸들러 부분

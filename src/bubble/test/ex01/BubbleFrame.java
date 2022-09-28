@@ -32,7 +32,7 @@ public class BubbleFrame extends JFrame{
 	private void initObject() {
 		backgroundMap = new JLabel(new ImageIcon("image/backgroundMap.png"));
 		setContentPane(backgroundMap);//3개층을 만들필요가 없어짐
-		player = new Player();
+		player = new Player(mContext);
 		getContentPane().add(player);
 	}
 
@@ -69,9 +69,9 @@ public class BubbleFrame extends JFrame{
 					}
 					break;
 				case KeyEvent.VK_SPACE:
-					Bubble bubble = new Bubble(mContext);
-					add(bubble);
-					
+//					Bubble bubble = new Bubble(mContext);
+//					add(bubble);
+					player.attack();
 					break;
 					
 		}
