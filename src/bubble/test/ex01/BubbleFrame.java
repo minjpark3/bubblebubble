@@ -67,7 +67,13 @@ public class BubbleFrame extends JFrame{
 					player.up();
 					}
 					break;
-				}
+				case KeyEvent.VK_SPACE:
+					Bubble bubble = new Bubble(player);
+					add(bubble);
+					
+					break;
+					
+		}
 			}
 		//키보드 해제 이벤트 핸들러
 		@Override
