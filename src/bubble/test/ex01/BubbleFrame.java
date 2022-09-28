@@ -21,6 +21,7 @@ public class BubbleFrame extends JFrame{
 	private BubbleFrame mContext = this;
 	private JLabel backgroundMap;
 	private Player player;
+	private Enemy enemy;
 		
 	public BubbleFrame() {
 		initObject();
@@ -33,7 +34,9 @@ public class BubbleFrame extends JFrame{
 		backgroundMap = new JLabel(new ImageIcon("image/backgroundMap.png"));
 		setContentPane(backgroundMap);//3개층을 만들필요가 없어짐
 		player = new Player(mContext);
-		getContentPane().add(player);
+		add(player);
+		enemy = new Enemy(mContext);
+		add(enemy);
 	}
 
 	private void initSetting() {
