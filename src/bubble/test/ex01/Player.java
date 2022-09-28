@@ -1,5 +1,8 @@
 package bubble.test.ex01;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -11,6 +14,7 @@ import lombok.Setter;
 @Setter
 public class Player extends JLabel implements Moveable {
 	private BubbleFrame mContext;
+	private List<Bubble> bubbleList;
 	// 위치상태
 	private int x;
 	private int y;
@@ -44,6 +48,7 @@ public class Player extends JLabel implements Moveable {
 	private void initObject() {
 		playerR = new ImageIcon("image/playerR.png");
 		playerL = new ImageIcon("image/playerL.png");
+		bubbleList =new ArrayList<>();
 
 	}
 
@@ -74,6 +79,7 @@ public class Player extends JLabel implements Moveable {
 		new Thread(()->{
 			Bubble bubble = new Bubble(mContext);
 			mContext.add(bubble);
+			bubbleList.add(bubble);
 			if(playerWay ==PlayerWay.LEFT) {
 				bubble.left();
 			}else {
